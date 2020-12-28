@@ -27,6 +27,11 @@ export class Board extends LitElement {
         width: 100%;
         height: auto;
         grid: auto-flow / 1fr 1fr 1fr 1fr 1fr;
+        justify-items: center;
+        align-items: center;
+      }
+      h2, mwc-textfield {
+        padding: 0 2vh 
       }
     `;
   }
