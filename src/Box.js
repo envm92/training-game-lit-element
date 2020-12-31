@@ -6,7 +6,6 @@ export class Box extends LitElement {
     return {
       isWinner: { type: Boolean },
       isOpen: { type: Boolean, attribute: true },
-      currentColor: { type: String },
       styles: { type: String },
     };
   }
@@ -28,21 +27,35 @@ export class Box extends LitElement {
     super();
     this.isWinner = false;
     this.isOpen = false;
-    this.currentColor = 'gray';
-    this.styles = { background: this.currentColor, cursor: 'pointer' };
+    this.styles = { background: 'gray', cursor: 'pointer' };
 
   }
 
   _onClick() {
     if (!this.isOpen) {
       this.isOpen = true;
-      this.currentColor = this.isWinner ? 'blue' : 'red';
-      this.styles = { background: this.currentColor, cursor: 'pointer' };
-      setTimeout(() => {
+    }
+  }
+
+  _itemChange() {
+    let currStyle = { background: 'gray'};
+    if (this.isOpen) {
+      currStyle.background = this.isWinner ? 'blue' : 'red';
+      currStyle.cursor = 'not-allowed';
+      this.updateComplete.then(() => {
         document.dispatchEvent(new CustomEvent('openBox', {detail: {
           isWinner: this.isWinner
         }}));
-      }, 200);
+      });
+    }
+    this.styles = currStyle;
+    
+  }
+
+  update(changedProperties) {
+    super.update(changedProperties);
+    if(changedProperties.has('isOpen') && (changedProperties.get('isOpen') !== undefined)) {
+      this._itemChange();
     }
   }
 

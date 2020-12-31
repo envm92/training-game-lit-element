@@ -36,6 +36,11 @@ export class Board extends LitElement {
     `;
   }
 
+
+  get inputEl() {
+    return this.shadowRoot.getElementById('count');
+  }
+
   _endGame(isOver) {
     if (isOver) {
       this._showAlert((this.isWinner) ? 'You win!!' : 'Game over');
@@ -73,10 +78,6 @@ export class Board extends LitElement {
     this.isWinner = false;
     this.tries = 0;
     this.boxes = [];
-    setTimeout(() => {
-      this._initGame();
-    }, 200);
-
   }
 
   _updateScore(win) {
@@ -129,7 +130,14 @@ export class Board extends LitElement {
     `;
   }
 
-  get inputEl() {
-    return this.shadowRoot.getElementById('count');
+  _isChanging(changedProperties, name) {
+    return changedProperties.has(name) && changedProperties.get(name) != undefined;
+  }
+
+  update(changedProperties) {
+    super.update(changedProperties);
+    if ( this._isChanging(changedProperties, 'lost') ||  this._isChanging(changedProperties, 'won') || this._isChanging(changedProperties, 'boxCount') ) {
+      this._initGame();
+    }
   }
 }

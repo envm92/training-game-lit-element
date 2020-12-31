@@ -8,14 +8,20 @@
     "lint-staged": "^10.0.0",
     "@web/test-runner": "^0.11.5",
     "@open-wc/testing": "^2.0.0",
-    "@web/dev-server": "^0.1.1"
+    "@web/dev-server": "^0.1.1",
+    "@open-wc/building-rollup": "^1.0.0",
+    "deepmerge": "^4.2.2",
+    "rimraf": "^2.6.3",
+    "rollup": "^2.3.4"
   },
   "scripts": {
     "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
     "test": "web-test-runner --coverage",
     "test:watch": "web-test-runner --watch",
-    "start": "web-dev-server"
+    "start": "web-dev-server",
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "start:build": "npm run build && web-dev-server --root-dir dist --app-index index.html --open --compatibility none"
   },
   "name": "training-game-lit-element",
   "version": "0.0.0",
