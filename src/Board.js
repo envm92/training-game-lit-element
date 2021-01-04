@@ -131,12 +131,12 @@ export class Board extends LitElement {
   }
 
   _isChanging(changedProperties, name) {
-    return changedProperties.has(name) && changedProperties.get(name) != undefined;
+    return changedProperties.has(name) && changedProperties.get(name) !== undefined;
   }
 
   update(changedProperties) {
     super.update(changedProperties);
-    if ( this._isChanging(changedProperties, 'lost') ||  this._isChanging(changedProperties, 'won') || this._isChanging(changedProperties, 'boxCount') ) {
+    if ( this._isChanging(changedProperties, 'lost') ||  this._isChanging(changedProperties, 'won') || this._isChanging(changedProperties,'boxCount') ) {
       this._initGame();
     }
   }

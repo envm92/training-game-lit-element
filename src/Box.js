@@ -38,7 +38,7 @@ export class Box extends LitElement {
   }
 
   _itemChange() {
-    let currStyle = { background: 'gray'};
+    const currStyle = { background: 'gray'};
     if (this.isOpen) {
       currStyle.background = this.isWinner ? 'blue' : 'red';
       currStyle.cursor = 'not-allowed';

@@ -1,6 +1,6 @@
 import { TrainingGameLitElement } from './TrainingGameLitElement.js';
-import { Score } from './Score';
-import { Box } from './Box';
+import { Score } from './Score.js';
+import { Box } from './Box.js';
 import { Board } from './Board.js';
 
 customElements.define('my-box', Box);
